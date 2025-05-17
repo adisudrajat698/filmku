@@ -14,7 +14,7 @@ videoUrl: "[https://download.blender.org/peach/bigbuckbunny\_movies/BigBuckBunny
 id: 2,
 title: "Big Buck Bunny",
 description: "A large and lovable rabbit deals with three bullying rodents.",
-videoUrl: "[https://download.blender.org/peach/bigbuckbunny\_movies/BigBuckBunny\_320x180.mp4](https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4)"
+videoUrl: "/videos/test.mp4"
 }
 ];
 
