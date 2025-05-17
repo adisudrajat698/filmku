@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nonton Film Online</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f9fafb;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .movie-card {
+      border: 1px solid #ddd;
+      padding: 16px;
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+    }
+    .movie-card:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      margin-top: 20px;
+    }
+    .search {
+      padding: 8px;
+      width: 100%;
+      max-width: 400px;
+      margin: 20px 0;
+    }
+    video {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 720px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Nonton Film Online</h1>
+  <input id="searchInput" class="search" placeholder="Cari judul film..." />
+
+  <div id="movieList" class="grid"></div>
+
+  <div id="nowPlaying"></div>
+
+  <script>
+    const movies = [
+      {
+        id: 1,
+        title: "The Matrix",
+        description: "A computer hacker learns about the true nature of reality and his role in the war against its controllers.",
+        videoUrl: "https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
+      },
+      {
+        id: 2,
+        title: "Big Buck Bunny",
+        description: "A large and lovable rabbit deals with three bullying rodents.",
+        videoUrl: "/videos/test.mp4" // pastikan test.mp4 kamu simpan di folder public/videos
+      }
+    ];
+
+    const movieList = document.getElementById("movieList");
+    const nowPlaying = document.getElementById("nowPlaying");
+    const searchInput = document.getElementById("searchInput");
+
+    function renderMovies(list) {
+      movieList.innerHTML = "";
+      list.forEach(movie => {
+        const card = document.createElement("div");
+        card.className = "movie-card";
+        card.innerHTML = `
+          <h2>${movie.title}</h2>
+          <p>${movie.description}</p>
+        `;
+        card.onclick = () => {
+          nowPlaying.innerHTML = `
+            <h2>Now Playing: ${movie.title}</h2>
+            <video controls>
+              <source src="${movie.videoUrl}" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          `;
+        };
+        movieList.appendChild(card);
+      });
+    }
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase();
+      const filtered = movies.filter(movie =>
+        movie.title.toLowerCase().includes(query)
+      );
+      renderMovies(filtered);
+    });
+
+    // render awal
+    renderMovies(movies);
+  </script>
+
+</body>
+</html>
